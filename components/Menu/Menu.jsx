@@ -35,7 +35,9 @@ const Menu = () => {
   const handleModal = () => {
     setOpen(true);
   };
-
+// useEffect(()=>{
+// getDoc(doc(DB,'Categories','BEAUTY_ESSENTIALS')).then((data)=>console.log(data.data()))
+// },[])
   return (
     <>
       <BasicModal open={open} setOpen={setOpen} selectedItem={selectedItem} />
@@ -64,14 +66,14 @@ const Menu = () => {
           <br/>
           <br/>
           <Search
-            serviceData={serviceData.map((item) => item.service)}
+            serviceData={serviceData.map((item) => item.service.trim())}
             entireData={serviceData}
           />
           {serviceData.length > 0 &&
             serviceData.map((item) => {
               return (
                 <Stack
-                  key={item.service}
+                  key={item.service.trim()}
                   gap={1}
                   component={Paper}
                   direction="row"
@@ -94,7 +96,7 @@ const Menu = () => {
                   />
                   <Stack direction="column" height="100%" width="100%" gap={1}>
                     <Typography variant="h5" fontWeight="bold">
-                      {item.service}
+                      {item.service.trim()}
                     </Typography>
                     <Stack
                       direction="row"
@@ -110,7 +112,7 @@ const Menu = () => {
                         variant="contained"
                         onClick={() =>
                           router.push(
-                            `/menu/${item.service.replaceAll(" ", "_")}`
+                            `/menu/${item.service.trim().replaceAll(" ", "_")}`
                           )
                         }
                       >
@@ -123,7 +125,7 @@ const Menu = () => {
                           borderRadius: "10px !important",
                         }}
                         onClick={() =>
-                          router.push(`/${item.service.replaceAll(" ", "_")}`)
+                          router.push(`/${item.service.trim().replaceAll(" ", "_")}`)
                         }
                       >
                         Gallery
