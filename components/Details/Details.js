@@ -21,15 +21,18 @@ const Details = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { id: categoryId } = router.query;
+  console.log(categoryId)
   useEffect(() => {
     setLoading(true);
     const unsub = onSnapshot(collection(DB, "Categories"), (snapshot) => {
       const arr = [];
       snapshot.docs.map((item) => {
-        if (item.id === categoryId) {
+        console.log('item.id', item.id.trim()===categoryId.trim())
+        if (item.id.trim() == categoryId.trim()) {
           arr.push(item.data());
         }
       });
+     
       setServiceData(arr[0]);
       setLoading(false);
     });
