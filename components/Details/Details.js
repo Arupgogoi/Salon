@@ -24,7 +24,7 @@ const Details = () => {
   console.log(categoryId)
   useEffect(() => {
     setLoading(true);
-    const unsub = onSnapshot(collection(DB, "Categories"), (snapshot) => {
+    const unsub = onSnapshot(collection(DB, "All_Categories"), (snapshot) => {
       const arr = [];
       snapshot.docs.map((item) => {
         console.log('item.id', item.id.trim()===categoryId.trim())
