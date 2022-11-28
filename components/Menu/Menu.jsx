@@ -26,7 +26,7 @@ const Menu = () => {
   const router = useRouter();
   useEffect(() => {
     setLoading(true);
-    const unsub = onSnapshot(collection(DB, "Categories"), (snapshot) => {
+    const unsub = onSnapshot(collection(DB, "All_Categories"), (snapshot) => {
       setServiceData(snapshot.docs.map((item) => item.data()));
       setLoading(false);
     });
@@ -35,9 +35,9 @@ const Menu = () => {
   const handleModal = () => {
     setOpen(true);
   };
-// useEffect(()=>{
-// getDoc(doc(DB,'Categories','BEAUTY_ESSENTIALS')).then((data)=>console.log(data.data()))
-// },[])
+  // useEffect(()=>{
+  // getDoc(doc(DB,'Categories','BEAUTY_ESSENTIALS')).then((data)=>console.log(data.data()))
+  // },[])
   return (
     <>
       <BasicModal open={open} setOpen={setOpen} selectedItem={selectedItem} />
@@ -51,20 +51,14 @@ const Menu = () => {
         <Container sx={{ my: 2 }}>
           <AppBar position="fixed">
             <Toolbar>
-              <Stack alignItems='center' width='100%' py={1}>
-                <Box
-                  component="img"
-                  src="/images/appLogo.png"
-                  width="180px"
-                 
-                />
-                 
+              <Stack alignItems="center" width="100%" py={1}>
+                <Box component="img" src="/images/appLogo.png" width="180px" />
               </Stack>
             </Toolbar>
           </AppBar>
           <Toolbar />
-          <br/>
-          <br/>
+          <br />
+          <br />
           <Search
             serviceData={serviceData.map((item) => item.service.trim())}
             entireData={serviceData}
@@ -112,7 +106,7 @@ const Menu = () => {
                         variant="contained"
                         onClick={() =>
                           router.push(
-                            `/menu/${item.service.trim().replaceAll(" ", "_")}`
+                            `/menu/${item.docId}`
                           )
                         }
                       >
@@ -125,7 +119,9 @@ const Menu = () => {
                           borderRadius: "10px !important",
                         }}
                         onClick={() =>
-                          router.push(`/${item.service.trim().replaceAll(" ", "_")}`)
+                          router.push(
+                            `/${item.docId}`
+                          )
                         }
                       >
                         Gallery

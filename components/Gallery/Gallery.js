@@ -21,7 +21,7 @@ export default function Gallery() {
   const router = useRouter();
   const { gallery } = router.query;
   React.useEffect(() => {
-    const unsub = onSnapshot(collection(DB, "Categories"), (snapshot) => {
+    const unsub = onSnapshot(collection(DB, "All_Categories"), (snapshot) => {
       let arr = [];
       snapshot.docs.filter((item) => {
         if (item.id === gallery) {
@@ -33,11 +33,11 @@ export default function Gallery() {
     });
     return () => unsub();
   }, []);
-
+console.log('categoryData', categoryData)
   return (
     <Box sx={{ width: "100%", height: "100%", overflowY: "scroll" }}>
       <Typography variant="h6">
-        Images for {gallery?.replaceAll("_", " ")}
+        Images for {categoryData[0]?.service}
       </Typography>
       <ImageList variant="masonry" cols={2} gap={8}>
         {categoryData.length > 0 &&
@@ -52,7 +52,7 @@ export default function Gallery() {
             </ImageListItem>
           ))}
       </ImageList>
-      {categoryData.length > 0 && !categoryData[0].galleryImages && (
+      {categoryData.length > 0 && categoryData[0].galleryImages.length==0 && (
         <Stack
           height="50vh"
           width="100%"
