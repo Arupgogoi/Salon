@@ -52,7 +52,7 @@ const Menu = () => {
           <AppBar position="fixed">
             <Toolbar>
               <Stack alignItems="center" width="100%" py={1}>
-                <Box component="img" src="/images/appLogo.png" width="180px" />
+                <Typography>Radison</Typography>
               </Stack>
             </Toolbar>
           </AppBar>
